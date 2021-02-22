@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="test">{{ form.msg }}- {{ form.text}}</button>
+  </div>
+  <script>  
+  /**
+    (function anonymous(
+    ) {
+    const _Vue = Vue
+
+    return function render(_ctx, _cache) {
+      with (_ctx) {
+        const { toDisplayString: _toDisplayString, createVNode: _createVNode, openBlock: _openBlock, createBlock: _createBlock } = _Vue
+
+        return (_openBlock(), _createBlock("button", { onClick: test }, _toDisplayString(msg), 9 , ["onClick"]))
+      }
+    }
+    })
+  
+  */
+ /**
+  vue3响应式原理
+  1：data的处理主要在componentOptions.ts的resolveData函数里面
+  2：render函数生成主要在component.ts中的finishComponentSetup函数里面
+  3：生成vnode的函数主要在componentRenderUtils.ts中的setupRenderEffect函数里面
+
+ */
+    const { createApp } = Vue;
+    // var a = Vue.createApp
+    var app = createApp({
+      data() {
+        return {
+          form: {
+            msg: 'hello vue',
+          }
+        }
+      },
+      mounted() {
+        this.form.text = 'text';
+        // setInterval(() => {
+          // this.msg++
+        // }, 1000);
+      },
+      methods: {
+        test() {
+          alert(1)
+        }
+      }
+    })
+    console.log(app)
+    app.mount('#app')
+
+  </script>
+</body>
+</html>
