@@ -459,6 +459,7 @@ function baseCreateRenderer(
     isSVG = false,
     optimized = false
   ) => {
+    debugger
     // patching & not same type, unmount old tree
     if (n1 && !isSameVNodeType(n1, n2)) {
       anchor = getNextHostNode(n1)
@@ -499,6 +500,7 @@ function baseCreateRenderer(
         )
         break
       default:
+        debugger
         if (shapeFlag & ShapeFlags.ELEMENT) {
           processElement(
             n1,
@@ -1336,8 +1338,10 @@ function baseCreateRenderer(
     isSVG,
     optimized
   ) => {
+    
     // create reactive effect for rendering
     instance.update = effect(function componentEffect() {
+      
       if (!instance.isMounted) {
         let vnodeHook: VNodeHook | null | undefined
         const { el, props } = initialVNode
@@ -1356,6 +1360,7 @@ function baseCreateRenderer(
         if (__DEV__) {
           startMeasure(instance, `render`)
         }
+        debugger
         const subTree = (instance.subTree = renderComponentRoot(instance))
         if (__DEV__) {
           endMeasure(instance, `render`)
@@ -2195,6 +2200,7 @@ function baseCreateRenderer(
   }
 
   const render: RootRenderFunction = (vnode, container) => {
+    debugger
     if (vnode == null) {
       if (container._vnode) {
         unmount(container._vnode, null, null, true)

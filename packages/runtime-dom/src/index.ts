@@ -30,6 +30,7 @@ let renderer: Renderer<Element> | HydrationRenderer
 let enabledHydration = false
 
 function ensureRenderer() {
+  // debugger
   return renderer || (renderer = createRenderer<Node, Element>(rendererOptions))
 }
 
@@ -59,6 +60,7 @@ export const createApp = ((...args) => {
 
   const { mount } = app
   app.mount = (containerOrSelector: Element | ShadowRoot | string): any => {
+    // debugger
     const container = normalizeContainer(containerOrSelector)
     if (!container) return
     const component = app._component

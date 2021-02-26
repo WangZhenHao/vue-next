@@ -9,7 +9,7 @@
   <div id="app"></div>
   <script>
     function reactice(obj) {
-      // if(!isObject(obj)) return obj
+      // if(!isObject(obj)) return obj 
 
       return new Proxy(obj, {
         get(target, key, receiver) {
@@ -65,6 +65,8 @@
 
     }
 
+    console.log(targetMap);
+
     function trigger(target, key) {
       var tMap = targetMap.get(target)
 
@@ -88,13 +90,16 @@
 
     var upadte = function() {
       var app = document.querySelector('#app')
-     app.innerHTML = state.msg ? state.msg : ''
+      app.innerHTML = state.msg ? state.msg : ''
     }
     
     
     effect(upadte)
     
-    state.msg = 'tset'
+   var a = 1;
+   setInterval(() => {
+    state.msg = a++
+   }, 3000)
     console.log(state)
     // setInterval(() => {
     //   state.msg++

@@ -666,7 +666,6 @@ function finishComponentSetup(
   isSSR: boolean
 ) {
   const Component = instance.type as ComponentOptions
-
   // template / render function normalization
   if (__NODE_JS__ && isSSR) {
     if (Component.render) {

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="demo">
+        {{ detail.title }}
+        <div class="ref" ref="test"></div>
+    </div>
+    <script>
+        var { createApp, ref, watchEffect, reactive, onMounted  } = Vue;
+
+        createApp({
+            setup() {
+                var state = reactive({ title: 1 })
+                var test = ref(null);
+
+
+                // setInterval(() => {
+                //     console.log(state.title)
+                //     state.title++
+                // }, 1000)
+                onMounted(() => {
+                    console.log(test)
+                })
+
+                return {
+                    detail: state,
+                    test
+                }
+            }
+        }).mount('#demo')
+    </script>
+</body>
+</html>

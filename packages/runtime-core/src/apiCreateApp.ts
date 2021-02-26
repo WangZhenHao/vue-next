@@ -129,7 +129,7 @@ export function createAppAPI<HostElement>(
       __DEV__ && warn(`root props passed to app.mount() must be an object.`)
       rootProps = null
     }
-
+    // debugger
     const context = createAppContext()
     const installedPlugins = new Set()
 
@@ -225,6 +225,7 @@ export function createAppAPI<HostElement>(
       },
 
       mount(rootContainer: HostElement, isHydrate?: boolean): any {
+        debugger
         if (!isMounted) {
           const vnode = createVNode(
             rootComponent as ConcreteComponent,

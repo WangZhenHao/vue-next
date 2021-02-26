@@ -8,7 +8,7 @@
 </head>
 <body>
   <div id="app">
-    <button @click="test">{{ form.msg }}- {{ form.text}}</button>
+    <button @click="test">{{ form.msg }} - {{ form.text}}</button>
   </div>
   <script>  
   /**
@@ -20,7 +20,7 @@
       with (_ctx) {
         const { toDisplayString: _toDisplayString, createVNode: _createVNode, openBlock: _openBlock, createBlock: _createBlock } = _Vue
 
-        return (_openBlock(), _createBlock("button", { onClick: test }, _toDisplayString(msg), 9 , ["onClick"]))
+        return (_openBlock(), _createBlock("button", { onClick: test }, _toDisplayString(form.msg) + " - " + _toDisplayString(form.text), 9 , ["onClick"]))
       }
     }
     })
@@ -32,6 +32,15 @@
   2：render函数生成主要在component.ts中的finishComponentSetup函数里面
   3：生成vnode的函数主要在componentRenderUtils.ts中的setupRenderEffect函数里面
 
+
+  createApp函数来自runtime-dom/src/index.ts;
+  createApp函数最终是在runtime-core/src/apiCreateApp.ts中的createAppAPI函数产生
+  
+  createApp接受对象就是我们所写的对象{data: xxx, mounted: xxx, methods: xxx},先保存一份createAppAPI函数里面的mount，然后
+  会重写mount函数，重写的mount主要是获取元素节点的信息，并且把innerHTML内容复制到_component.template里面
+  把获取节点的信息传给缓存下来的mount
+  
+  
  */
     const { createApp } = Vue;
     // var a = Vue.createApp

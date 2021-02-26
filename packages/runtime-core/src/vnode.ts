@@ -322,6 +322,7 @@ function _createVNode(
   dynamicProps: string[] | null = null,
   isBlockNode = false
 ): VNode {
+  // debugger
   if (!type || type === NULL_DYNAMIC_COMPONENT) {
     if (__DEV__ && !type) {
       warn(`Invalid vnode type when creating vnode: ${type}.`)
@@ -364,7 +365,7 @@ function _createVNode(
       props.style = normalizeStyle(style)
     }
   }
-
+  debugger
   // encode the vnode type information into a bitmap
   const shapeFlag = isString(type)
     ? ShapeFlags.ELEMENT
