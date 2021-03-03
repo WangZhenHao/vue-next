@@ -139,6 +139,7 @@ export function resetTracking() {
 }
 
 export function track(target: object, type: TrackOpTypes, key: unknown) {
+  // debugger
   if (!shouldTrack || activeEffect === undefined) {
     return
   }
@@ -172,6 +173,7 @@ export function trigger(
   oldValue?: unknown,
   oldTarget?: Map<unknown, unknown> | Set<unknown>
 ) {
+  debugger
   const depsMap = targetMap.get(target)
   if (!depsMap) {
     // never been tracked

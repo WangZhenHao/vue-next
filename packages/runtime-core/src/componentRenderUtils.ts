@@ -73,6 +73,7 @@ export function renderComponentRoot(
       // withProxy is a proxy with a different `has` trap only for
       // runtime-compiled render functions using `with` block.
       const proxyToUse = withProxy || proxy
+      // debugger
       result = normalizeVNode(
         render!.call(
           proxyToUse,
@@ -85,6 +86,7 @@ export function renderComponentRoot(
         )
       )
       fallthroughAttrs = attrs
+      // debugger
     } else {
       // functional
       const render = Component as FunctionalComponent

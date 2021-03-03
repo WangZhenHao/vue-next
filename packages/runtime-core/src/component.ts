@@ -665,6 +665,7 @@ function finishComponentSetup(
   instance: ComponentInternalInstance,
   isSSR: boolean
 ) {
+  
   const Component = instance.type as ComponentOptions
   // template / render function normalization
   if (__NODE_JS__ && isSSR) {
@@ -677,10 +678,12 @@ function finishComponentSetup(
       if (__DEV__) {
         startMeasure(instance, `compile`)
       }
+      // debugger
       Component.render = compile(Component.template, {
         isCustomElement: instance.appContext.config.isCustomElement,
         delimiters: Component.delimiters
       })
+      // debugger
       if (__DEV__) {
         endMeasure(instance, `compile`)
       }
@@ -698,7 +701,7 @@ function finishComponentSetup(
       )
     }
   }
-
+  // debugger
   // support for 2.x options
   if (__FEATURE_OPTIONS_API__) {
     currentInstance = instance

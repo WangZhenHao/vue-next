@@ -365,7 +365,7 @@ function _createVNode(
       props.style = normalizeStyle(style)
     }
   }
-  debugger
+  // debugger
   // encode the vnode type information into a bitmap
   const shapeFlag = isString(type)
     ? ShapeFlags.ELEMENT

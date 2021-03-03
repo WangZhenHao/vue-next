@@ -8,7 +8,7 @@
 <body>
     <script>
         /**
-        1:改项目配置只能用yarn安装，启动，在package.json的script中preinstall做了校验
+        1:该项目配置只能用yarn安装，启动，在package.json的script中preinstall做了校验
         
         2:yarn dev命令执行流程
 
@@ -22,7 +22,7 @@
         表示注入环境变量，可以通过process.env.BUILD拿到production的值
         
         实际上执行：
-        rollup -wc --environment COMMIT:xxx,TARGET:vue,FORMATS:global
+        vue3构建命名：rollup -wc --environment COMMIT:xxx,TARGET:vue,FORMATS:global
 
         3：解析命令行之后，就开始执行rollup.config.js文件
            获取TARGET文件夹的package.json的内容，既vue/pageage.json内容

@@ -194,10 +194,12 @@ function createReactiveObject(
   if (targetType === TargetType.INVALID) {
     return target
   }
+  // debugger
   const proxy = new Proxy(
     target,
     targetType === TargetType.COLLECTION ? collectionHandlers : baseHandlers
   )
+  
   proxyMap.set(target, proxy)
   return proxy
 }

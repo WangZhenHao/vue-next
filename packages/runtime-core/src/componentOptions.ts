@@ -886,6 +886,7 @@ function resolveData(
   dataFn: DataFn,
   publicThis: ComponentPublicInstance
 ) {
+  // debugger
   if (__DEV__ && !isFunction(dataFn)) {
     warn(
       `The data option must be a function. ` +
@@ -903,6 +904,7 @@ function resolveData(
   if (!isObject(data)) {
     __DEV__ && warn(`data() should return an object.`)
   } else if (instance.data === EMPTY_OBJ) {
+    // debugger
     instance.data = reactive(data)
   } else {
     // existing data: this is a mixin or extends.

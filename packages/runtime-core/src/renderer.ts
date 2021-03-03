@@ -459,7 +459,7 @@ function baseCreateRenderer(
     isSVG = false,
     optimized = false
   ) => {
-    debugger
+    // debugger
     // patching & not same type, unmount old tree
     if (n1 && !isSameVNodeType(n1, n2)) {
       anchor = getNextHostNode(n1)
@@ -500,7 +500,7 @@ function baseCreateRenderer(
         )
         break
       default:
-        debugger
+        // debugger
         if (shapeFlag & ShapeFlags.ELEMENT) {
           processElement(
             n1,
@@ -1360,7 +1360,7 @@ function baseCreateRenderer(
         if (__DEV__) {
           startMeasure(instance, `render`)
         }
-        debugger
+        // debugger
         const subTree = (instance.subTree = renderComponentRoot(instance))
         if (__DEV__) {
           endMeasure(instance, `render`)
@@ -1384,6 +1384,7 @@ function baseCreateRenderer(
           if (__DEV__) {
             startMeasure(instance, `patch`)
           }
+          debugger
           patch(
             null,
             subTree,
@@ -2200,7 +2201,7 @@ function baseCreateRenderer(
   }
 
   const render: RootRenderFunction = (vnode, container) => {
-    debugger
+    // debugger
     if (vnode == null) {
       if (container._vnode) {
         unmount(container._vnode, null, null, true)
