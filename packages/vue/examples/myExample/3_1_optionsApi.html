@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="test">{{ form.msg }} - {{ form.text}}</button>
+    <button>static</button>
+  </div>
+  <script>  
+  /**
+    (function anonymous(
+    ) {
+    const _Vue = Vue
+
+    return function render(_ctx, _cache) {
+      with (_ctx) {
+        const { toDisplayString: _toDisplayString, createVNode: _createVNode, openBlock: _openBlock, createBlock: _createBlock } = _Vue
+
+        return (_openBlock(), _createBlock("button", { onClick: test }, _toDisplayString(form.msg) + " - " + _toDisplayString(form.text), 9 , ["onClick"]))
+      }
+    }
+    })
+    
+  */
+ /**
+  vue3响应式原理
+  1：data的处理主要在componentOptions.ts的resolveData函数里面
+    1-1：setupStatefulComponent函数里面判断使用使用了setup,走setup的逻辑。否则执行finishComponentSetup,
+    走的是options_api的逻辑。finishComponentSetup生成通过template模板，编译生成render函数，然后执行
+    componentOptions.ts中的applyOptions(instance, Component);这个函数就是专门处理options里面的内容
+    判断有没有data,如果有data的定义，就执行resolveDate逻辑
+    1-2：根据判断data的数据是走baseHandlers.js中的createGetter方法，isReadonly参数false, 搜集依赖，执行track函数
+    1-3: 当触发到set操作符之后，会执行trigger方法，来触发视图的更新，异步执行只用了Promise.then来执行，丢弃MutationObserver， setImmediate，setTimout
+
+  2：render函数生成主要在component.ts中的finishComponentSetup函数里面
+     renderer.ts中的setupRenderEffect里面把renderComponentRoot收集起来，该函数其实收集就是render函数
+     render函数执行生成vnode是在componentRenderUtils.ts中的renderComponentRoot函数执行
+     
+     2-1：封装一个componentEffect函数，会把该函数传到effect.ts中的createReactiveEffect函数里面，createReactiveEffect函数就会把componentEffect存入数值里面，在触发data的get时候
+     就会把componentEffect函数收集到属性里面
+
+  3: 生成vnode之后就开始执行renderer.ts中的setupRenderEffect函数产生vnode,然后执行patch函数
+     3-1：生成的vnode会赋值给subTree变量，传给patch函数,第一次执行processFragmenth函数，执行那里的mountChildren函数，mountChildren函数
+     就是对子虚拟vnode执行patch，一个递归的流程
+    
+
+  createApp函数来自runtime-dom/src/index.ts;
+  createApp函数最终是在runtime-core/src/apiCreateApp.ts中的createAppAPI函数产生
+  
+  createApp接受对象就是我们所写的对象{data: xxx, mounted: xxx, methods: xxx},先保存一份createAppAPI函数里面的mount，然后
+  会重写mount函数，重写的mount主要是获取元素节点的信息，并且把innerHTML内容复制到_component.template里面
+  把获取节点的信息传给缓存下来的mount
+  
+  
+ */
+    const { createApp } = Vue;
+    // var a = Vue.createApp
+    var app = createApp({
+      data() {
+        return {
+          form: {
+            msg: 'hello vue',
+          }
+        }
+      },
+      mounted() {
+        setTimeout(() => {
+          this.form.text = 'text';
+        }, 3000)
+        // setInterval(() => {
+          // this.msg++
+        // }, 1000);
+      },
+      methods: {
+        test() {
+          alert(1)
+        }
+      }
+    })
+    console.log(app)
+    app.mount('#app')
+
+  </script>
+</body>
+</html>

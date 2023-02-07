@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="demo">
+        {{ detail.title }}
+        <button @click="showAlert">点击按钮</button>
+    </div>
+    
+
+    <script>
+        /**
+         * 
+            vue中的compositionApi
+            
+            
+        */
+        var { createApp, ref, watchEffect, reactive, onMounted  } = Vue;
+
+        var app = createApp({
+            setup() {
+                var state = reactive({ title: '测试' })
+                var test = ref(null);
+
+                var showAlert = function() {
+                    alert(1)
+                }
+                // setInterval(() => {
+                //     console.log(state.title)
+                //     state.title++
+                // }, 1000)
+                onMounted(() => {
+                    console.log(test)
+                })
+
+                return {
+                    detail: state,
+                    showAlert
+                }
+            }
+        })
+        app.mount('#demo')
+    </script>
+</body>
+</html>

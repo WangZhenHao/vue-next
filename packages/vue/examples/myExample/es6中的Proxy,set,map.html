@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var obj = {
+      a: 1,
+      b: 2
+    }
+    var p = new Proxy(obj, {
+      get(target, key, value) {
+        console.log('触发get', target, key, value)
+
+        return target[key]
+      },
+      set(target, key, value) {
+        console.log('触发set', target, key, value)
+        target[key] = value
+      }
+    })
+
+    var a = p.a;
+    p.c = 3
+    var c = p.c
+    // console.log(p)
+
+    /* 声明响应函数cb */
+    const effectStack = []
+    function effect(cb){  // 对函数进行高阶封装  
+      const rxEffect = function(){    
+        // 1.捕获异常    
+        // 2.fn出栈入栈    
+        // 3.执行fn    
+        try{      
+          effectStack.push(rxEffect)      
+          return cb()  
+        } finally{
+          effectStack.pop()
+        }
+        
+      } 
+       // 最初要执行一次,进行最初的依赖收集  
+      rxEffect()
+
+      return rxEffect
+    }
+    
+    // effect(function() {
+    //   return 1
+    // })
+
+    
+    /**
+     Set
+    */
+
+    function testSet() {
+
+    }
+
+    // testSet()
+
+    /*
+     WeakMap
+    */
+    function testWeakMap(target) {
+      var targetMap = new WeakMap();
+      var depsMap = new Map();
+      targetMap.set(target, depsMap)
+
+      console.log(targetMap, targetMap.get(target))
+    }
+
+    // testWeakMap({name: 'wzh', age: 12})
+  </script>
+</body>
+</html>

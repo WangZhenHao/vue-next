@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    function reactice(obj) {
+      // if(!isObject(obj)) return obj 
+
+      return new Proxy(obj, {
+        get(target, key, receiver) {
+          
+          track(target, key)
+          var ret = Reflect.get(target, key, receiver)
+          return typeof ret === 'object' ? reactice(obj) : ret;
+        },
+        set(target, key, value, receiver) {
+          var ret = Reflect.set(target, key, value, receiver)
+          trigger(target, key)
+
+          return ret
+        }
+      })
+    }
+    var queenTrack = []
+    function effect(cb) {
+      const effectFn = function() {
+        try {
+          queenTrack.push(cb)
+          
+          return cb()
+        } finally {
+          queenTrack.pop()
+        }
+      }
+
+      effectFn();
+
+      return effectFn;
+    }
+    var targetMap = new WeakMap();
+    function track(target, key) {
+      var effect = queenTrack[queenTrack.length - 1]
+      if(!effect) return;
+
+      var tMap = targetMap.get(target);
+      if(!tMap) {
+        tMap = new Map();
+        targetMap.set(target, tMap)
+      }
+
+      var deps = tMap.get(key)
+
+      if(!deps) {
+        deps = new Set();
+        tMap.set(key, deps)
+      }
+
+      deps.add(effect)
+
+
+    }
+
+    console.log(targetMap);
+
+    function trigger(target, key) {
+      var tMap = targetMap.get(target)
+
+      if(tMap) {
+        var deps = tMap.get(key)
+
+        if(deps) {
+          deps.forEach(effect => effect())
+        }
+      }
+    }
+  </script>
+
+  <script>
+    
+
+    var obj = {
+      
+    }
+    var state = reactice(obj)
+
+    var upadte = function() {
+      var app = document.querySelector('#app')
+      app.innerHTML = state.msg ? state.msg : ''
+    }
+    
+    
+    effect(upadte)
+    
+   var a = 1;
+   setInterval(() => {
+    state.msg = a++
+   }, 3000)
+    console.log(state)
+    // setInterval(() => {
+    //   state.msg++
+    //   // state.msg = 2
+      
+    // }, 1000)
+  </script>
+</body>
+</html>
