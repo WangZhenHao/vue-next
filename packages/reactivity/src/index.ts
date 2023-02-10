@@ -58,7 +58,8 @@ export {
   type EffectScheduler,
   type DebuggerOptions,
   type DebuggerEvent,
-  type DebuggerEventExtraInfo
+  type DebuggerEventExtraInfo,
+  targetMap
 } from './effect'
 export {
   effectScope,

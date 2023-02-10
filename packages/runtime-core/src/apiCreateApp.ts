@@ -305,6 +305,7 @@ export function createAppAPI<HostElement>(
                 ` you need to unmount the previous app by calling \`app.unmount()\` first.`
             )
           }
+          // debugger
           const vnode = createVNode(
             rootComponent as ConcreteComponent,
             rootProps

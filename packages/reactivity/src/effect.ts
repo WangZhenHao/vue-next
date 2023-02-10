@@ -16,7 +16,7 @@ import { ComputedRefImpl } from './computed'
 // which maintains a Set of subscribers, but we simply store them as
 // raw Sets to reduce memory overhead.
 type KeyToDepMap = Map<any, Dep>
-const targetMap = new WeakMap<any, KeyToDepMap>()
+export const targetMap = new WeakMap<any, KeyToDepMap>()
 
 // The number of effects currently being tracked recursively.
 let effectTrackDepth = 0
@@ -80,10 +80,12 @@ export class ReactiveEffect<T = any> {
     public scheduler: EffectScheduler | null = null,
     scope?: EffectScope
   ) {
+    // debugger
     recordEffectScope(this, scope)
   }
 
   run() {
+    // debugger
     if (!this.active) {
       return this.fn()
     }
@@ -211,6 +213,7 @@ export function resetTracking() {
 }
 
 export function track(target: object, type: TrackOpTypes, key: unknown) {
+  // debugger
   if (shouldTrack && activeEffect) {
     let depsMap = targetMap.get(target)
     if (!depsMap) {
@@ -226,6 +229,7 @@ export function track(target: object, type: TrackOpTypes, key: unknown) {
       : undefined
 
     trackEffects(dep, eventInfo)
+    console.log(key, targetMap)
   }
 }
 

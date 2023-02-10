@@ -72,6 +72,7 @@ import { initFeatureFlags } from './featureFlags'
 import { isAsyncWrapper } from './apiAsyncComponent'
 import { isCompatEnabled } from './compat/compatConfig'
 import { DeprecationTypes } from './compat/compatConfig'
+// import { targetMap } from '@vue/reactivity'
 
 export interface Renderer<HostElement = RendererElement> {
   render: RootRenderFunction<HostElement>
@@ -336,7 +337,7 @@ function baseCreateRenderer(
   if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
     setDevtoolsHook(target.__VUE_DEVTOOLS_GLOBAL_HOOK__, target)
   }
-
+  // debugger
   const {
     insert: hostInsert,
     remove: hostRemove,
@@ -1365,7 +1366,9 @@ function baseCreateRenderer(
           if (__DEV__) {
             startMeasure(instance, `render`)
           }
+          debugger
           const subTree = (instance.subTree = renderComponentRoot(instance))
+          // console.log(targetMap)
           if (__DEV__) {
             endMeasure(instance, `render`)
           }

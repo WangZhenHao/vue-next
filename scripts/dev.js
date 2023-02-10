@@ -19,6 +19,7 @@ const format = args.f || 'global'
 const inlineDeps = args.i || args.inline
 const pkg = require(`../packages/${target}/package.json`)
 
+console.log(args)
 // resolve output
 const outputFormat = format.startsWith('global')
   ? 'iife'
