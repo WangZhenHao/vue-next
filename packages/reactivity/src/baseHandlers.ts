@@ -166,7 +166,7 @@ function createSetter(shallow = false) {
     value: unknown,
     receiver: object
   ): boolean {
-    debugger
+    // debugger
     let oldValue = (target as any)[key]
     if (isReadonly(oldValue) && isRef(oldValue) && !isRef(value)) {
       return false

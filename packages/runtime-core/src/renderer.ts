@@ -1366,7 +1366,7 @@ function baseCreateRenderer(
           if (__DEV__) {
             startMeasure(instance, `render`)
           }
-          debugger
+          // debugger
           const subTree = (instance.subTree = renderComponentRoot(instance))
           // console.log(targetMap)
           if (__DEV__) {

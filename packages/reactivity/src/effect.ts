@@ -277,7 +277,7 @@ export function trigger(
     // never been tracked
     return
   }
-
+  // debugger
   let deps: (Dep | undefined)[] = []
   if (type === TriggerOpTypes.CLEAR) {
     // collection being cleared

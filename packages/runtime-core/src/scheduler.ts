@@ -83,6 +83,7 @@ export function queueJob(job: SchedulerJob) {
   // if the job is a watch() callback, the search will start with a +1 index to
   // allow it recursively trigger itself - it is the user's responsibility to
   // ensure it doesn't end up in an infinite loop.
+  
   if (
     !queue.length ||
     !queue.includes(
