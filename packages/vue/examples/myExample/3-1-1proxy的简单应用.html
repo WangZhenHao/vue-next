@@ -63,7 +63,11 @@
             const effects = Array.isArray(deps) ? deps : [...deps]
 
             for (const effect of effects) {
-                effect.run();
+                if(effect.scheduler) {
+                    effect.scheduler();
+                } else {
+                    effect.run();
+                }
             }
         }
 
@@ -99,8 +103,9 @@
             return proxy
         }
 
-        var ReactiveEffect = function (fn) {
+        var ReactiveEffect = function (fn, scheduler) {
             this.fn = fn;
+            this.scheduler = scheduler;
         }
         ReactiveEffect.prototype.run = function () {
             try {
@@ -110,7 +115,38 @@
             }
         }
 
+        var queue = [];
+        var currentFlushPromise = null;
+        var resolvedPromise = Promise.resolve();
+        var count = 0
+        function flushJobs(seen) {
+            try {
+                // ++count
+                // console.log(count)
+                for(var flushIndex = 0; flushIndex < queue.length; flushIndex++) {
+                    let job = queue[flushIndex]
+                    job();
+                }
+            } finally {
+                queue.length = 0;
+            }
+            
+        }
+        /**
+            多次修改值更新一次视图        
+        */
+        function queseJob(job) {
+            
+            if(!queue.length || !queue.includes(job)) {
+                queue.push(job)
+                currentFlushPromise = resolvedPromise.then(flushJobs)
+            }
 
+            
+            // setTimeout(() => {
+            //     flushJobs
+            // })
+        }
     </script>
     <script>
 
@@ -138,17 +174,25 @@
 
             return dom;
         }
-        var effect = new ReactiveEffect(updateComponent)
+        var update = () => {
+            effect.run();
+        }
+        var effect = new ReactiveEffect(updateComponent, () => queseJob(update))
 
-        effect.run();
+        update()
 
         setTimeout(() => {
             data.count2 = '未定义'
+            data.count.a = 1
         }, 1000);
+
+        // setTimeout(() => {
+        //     data.count2 = '未定义2'
+        //     data.count.a = 2
+        // }, 3000);
 
         setInterval(() => {
             data.count.a++
-            console.log(data.count.a)
         }, 3000)
     </script>
     <script>

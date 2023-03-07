@@ -98,6 +98,7 @@ export const createApp = ((...args) => {
     }
 
     // clear content before mounting
+    // debugger
     container.innerHTML = ''
     const proxy = mount(container, false, container instanceof SVGElement)
     if (container instanceof Element) {

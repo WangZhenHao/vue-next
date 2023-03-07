@@ -648,6 +648,7 @@ function setupStatefulComponent(
   if (__DEV__) {
     exposePropsOnRenderContext(instance)
   }
+  // debugger
   // 2. call setup()
   const { setup } = Component
   if (setup) {
@@ -730,9 +731,11 @@ export function handleSetupResult(
       instance.devtoolsRawSetupState = setupResult
     }
     instance.setupState = proxyRefs(setupResult)
-    if (__DEV__) {
-      exposeSetupStateOnRenderContext(instance)
-    }
+    // debugger
+    // if (__DEV__) {
+    //   exposeSetupStateOnRenderContext(instance)
+    // }
+    // debugger
   } else if (__DEV__ && setupResult !== undefined) {
     warn(
       `setup() should return an object. Received: ${
@@ -740,6 +743,7 @@ export function handleSetupResult(
       }`
     )
   }
+  // debugger
   finishComponentSetup(instance, isSSR)
 }
 
@@ -756,6 +760,7 @@ let installWithProxy: (i: ComponentInternalInstance) => void
  * Note the exported method uses any to avoid d.ts relying on the compiler types.
  */
 export function registerRuntimeCompiler(_compile: any) {
+  // debugger
   compile = _compile
   installWithProxy = i => {
     if (i.render!._rc) {
@@ -819,7 +824,9 @@ export function finishComponentSetup(
             extend(finalCompilerOptions.compatConfig, Component.compatConfig)
           }
         }
+        // debugger
         Component.render = compile(template, finalCompilerOptions)
+        // console.log(Component.render)
         if (__DEV__) {
           endMeasure(instance, `compile`)
         }

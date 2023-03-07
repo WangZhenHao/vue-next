@@ -67,12 +67,39 @@ export function renderComponentRoot(
   if (__DEV__) {
     accessedAttrs = false
   }
-
+  // debugger
   try {
     if (vnode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
       // withProxy is a proxy with a different `has` trap only for
       // runtime-compiled render functions using `with` block.
       const proxyToUse = withProxy || proxy
+      // console.log(render)
+      // console.log(render!.call(
+      //   proxyToUse,
+      //   proxyToUse!,
+      //   renderCache,
+      //   props,
+      //   setupState,
+      //   data,
+      //   ctx
+      // ))
+      
+      // let render2 = eval(`(function render(_ctx, _cache) {
+      //   debugger
+      //   console.log(_ctx, arguments)
+      //   const _Vue = Vue;
+      //   const _hoisted_1 = ["onClick"]
+      //   with (_ctx) {
+      //     const { toDisplayString: _toDisplayString, createElementVNode: _createElementVNode, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock } = _Vue
+          
+      //     return (_openBlock(), _createElementBlock(_Fragment, null, [
+      //       _createElementVNode("p", null, _toDisplayString(detail.title), 1 /* TEXT */),
+      //       _createElementVNode("p", null, _toDisplayString(test), 1 /* TEXT */),
+      //       _createElementVNode("button", { onClick: showAlert }, "点击按钮", 8 /* PROPS */, _hoisted_1)
+      //     ], 64 /* STABLE_FRAGMENT */))
+      //   }
+      // })`)
+      
       result = normalizeVNode(
         render!.call(
           proxyToUse,

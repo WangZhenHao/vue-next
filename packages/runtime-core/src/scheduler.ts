@@ -83,7 +83,7 @@ export function queueJob(job: SchedulerJob) {
   // if the job is a watch() callback, the search will start with a +1 index to
   // allow it recursively trigger itself - it is the user's responsibility to
   // ensure it doesn't end up in an infinite loop.
-  
+  // debugger
   if (
     !queue.length ||
     !queue.includes(
@@ -103,6 +103,7 @@ export function queueJob(job: SchedulerJob) {
 function queueFlush() {
   if (!isFlushing && !isFlushPending) {
     isFlushPending = true
+    
     currentFlushPromise = resolvedPromise.then(flushJobs)
   }
 }
@@ -229,6 +230,7 @@ function flushJobs(seen?: CountMap) {
     : NOOP
 
   try {
+    
     for (flushIndex = 0; flushIndex < queue.length; flushIndex++) {
       const job = queue[flushIndex]
       if (job && job.active !== false) {

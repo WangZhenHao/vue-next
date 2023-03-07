@@ -1200,7 +1200,7 @@ function baseCreateRenderer(
         parentComponent,
         parentSuspense
       ))
-
+    debugger
     if (__DEV__ && instance.type.__hmrId) {
       registerHMR(instance)
     }
@@ -1300,6 +1300,7 @@ function baseCreateRenderer(
     optimized
   ) => {
     const componentUpdateFn = () => {
+      debugger
       if (!instance.isMounted) {
         let vnodeHook: VNodeHook | null | undefined
         const { el, props } = initialVNode

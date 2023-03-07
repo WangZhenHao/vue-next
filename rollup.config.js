@@ -48,7 +48,7 @@ const outputConfigs = {
     format: `cjs`
   },
   global: {
-    file: resolve(`dist/${name}.global.js`),
+    file: resolve(`dist/${name}.global11111.js`),
     format: `iife`
   },
   // runtime-only builds, for main "vue" package only

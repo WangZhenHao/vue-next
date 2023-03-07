@@ -640,7 +640,7 @@ export function applyOptions(instance: ComponentInternalInstance) {
   } = options
 
   const checkDuplicateProperties = __DEV__ ? createDuplicateChecker() : null
-
+  // debugger
   if (__DEV__) {
     const [propsOptions] = instance.propsOptions
     if (propsOptions) {

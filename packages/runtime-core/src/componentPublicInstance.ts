@@ -282,7 +282,7 @@ export const PublicInstanceProxyHandlers: ProxyHandler<any> = {
     if (__DEV__ && key === '__isVue') {
       return true
     }
-
+    
     // data / props / ctx
     // This getter gets called for every property access on the render context
     // during render and is a major hotspot. The most expensive part of this
@@ -483,6 +483,7 @@ export const RuntimeCompiledPublicInstanceProxyHandlers = /*#__PURE__*/ extend(
       if ((key as any) === Symbol.unscopables) {
         return
       }
+      // debugger
       return PublicInstanceProxyHandlers.get!(target, key, target)
     },
     has(_: ComponentRenderContext, key: string) {
@@ -498,7 +499,7 @@ export const RuntimeCompiledPublicInstanceProxyHandlers = /*#__PURE__*/ extend(
     }
   }
 )
-
+console.log(RuntimeCompiledPublicInstanceProxyHandlers)
 // dev only
 // In dev mode, the proxy target exposes the same properties as seen on `this`
 // for easier console inspection. In prod mode it will be an empty object so

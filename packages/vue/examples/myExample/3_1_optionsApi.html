@@ -128,7 +128,7 @@
       1)Component.render = compile(template, finalCompilerOptions)
       template：是写的html代码，
       finalCompilerOptions：配置delimiters，isCustomElement等
-      2)执行applyOptions(instance)
+      2)执行applyOptions(instance)->packages\runtime-core\src\component.ts
         处理自定义的method，data,mounted生命周期等等，
         1-data定义成响应式属性instance.data = reactive(data)
         2-reactive在packages\reactivity\src\reactive.ts中

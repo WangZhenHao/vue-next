@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+        <p>{{ detail.title }}</p>
+        <p>{{ test }}</p>
+        <button @click="showAlert">点击按钮</button>
+    </div>
+    <script>
+        /**
+         function render(_ctx, _cache) {
+            with (_ctx) {
+                const { toDisplayString: _toDisplayString, createElementVNode: _createElementVNode, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock } = _Vue
+
+                return (_openBlock(), _createElementBlock(_Fragment, null, [
+                _createElementVNode("p", null, _toDisplayString(detail.title), 1 ),
+                _createElementVNode("p", null, _toDisplayString(test), 1),
+                _createElementVNode("button", { onClick: showAlert }, "点击按钮", 8 , _hoisted_1)
+                ], 64 ))
+            }
+         }
+         */
+        // var render = function render(_ctx, _cache) {
+        //         with (_ctx) {
+        //             console.log(_ctx, detail)
+        //             return {
+        //                 ctx: _ctx,
+        //                 cache: _cache
+        //             }
+        //         }
+
+                
+        //     }
+
+        // console.log(render.call(1,2,{ detail: 1 }))
+        // let a = eval(`(function render(_ctx, _cache) {
+        //     debugger
+        //   with (_ctx) {
+        //       return _ctx
+        //   }
+        // })`)
+        // a(1)
+    </script>
+</body>
+</html>
