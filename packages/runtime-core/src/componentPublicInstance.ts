@@ -290,6 +290,7 @@ export const PublicInstanceProxyHandlers: ProxyHandler<any> = {
     // access on a plain object, so we use an accessCache object (with null
     // prototype) to memoize what access type a key corresponds to.
     let normalizedProps
+    // debugger
     if (key[0] !== '$') {
       const n = accessCache![key]
       if (n !== undefined) {
@@ -306,6 +307,8 @@ export const PublicInstanceProxyHandlers: ProxyHandler<any> = {
         }
       } else if (hasSetupBinding(setupState, key)) {
         accessCache![key] = AccessTypes.SETUP
+        console.log(setupState[key])
+        // debugger
         return setupState[key]
       } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {
         accessCache![key] = AccessTypes.DATA
@@ -499,7 +502,7 @@ export const RuntimeCompiledPublicInstanceProxyHandlers = /*#__PURE__*/ extend(
     }
   }
 )
-console.log(RuntimeCompiledPublicInstanceProxyHandlers)
+// console.log(RuntimeCompiledPublicInstanceProxyHandlers)
 // dev only
 // In dev mode, the proxy target exposes the same properties as seen on `this`
 // for easier console inspection. In prod mode it will be an empty object so

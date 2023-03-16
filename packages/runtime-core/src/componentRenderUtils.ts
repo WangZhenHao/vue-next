@@ -85,21 +85,21 @@ export function renderComponentRoot(
       // ))
       
       // let render2 = eval(`(function render(_ctx, _cache) {
-      //   debugger
-      //   console.log(_ctx, arguments)
+        
+      //   const _con = console
       //   const _Vue = Vue;
       //   const _hoisted_1 = ["onClick"]
       //   with (_ctx) {
       //     const { toDisplayString: _toDisplayString, createElementVNode: _createElementVNode, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock } = _Vue
-          
+      //     _con.log(test)
+      //     debugger
       //     return (_openBlock(), _createElementBlock(_Fragment, null, [
-      //       _createElementVNode("p", null, _toDisplayString(detail.title), 1 /* TEXT */),
-      //       _createElementVNode("p", null, _toDisplayString(test), 1 /* TEXT */),
+      //       _createElementVNode("p", null, _toDisplayString(test.count), 1 /* TEXT */),
       //       _createElementVNode("button", { onClick: showAlert }, "点击按钮", 8 /* PROPS */, _hoisted_1)
       //     ], 64 /* STABLE_FRAGMENT */))
       //   }
       // })`)
-      
+      console.log(render)
       result = normalizeVNode(
         render!.call(
           proxyToUse,

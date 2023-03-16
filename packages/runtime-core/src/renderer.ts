@@ -366,6 +366,7 @@ function baseCreateRenderer(
     slotScopeIds = null,
     optimized = __DEV__ && isHmrUpdating ? false : !!n2.dynamicChildren
   ) => {
+    // debugger
     if (n1 === n2) {
       return
     }
@@ -1200,7 +1201,7 @@ function baseCreateRenderer(
         parentComponent,
         parentSuspense
       ))
-    debugger
+    // debugger
     if (__DEV__ && instance.type.__hmrId) {
       registerHMR(instance)
     }
@@ -1300,7 +1301,7 @@ function baseCreateRenderer(
     optimized
   ) => {
     const componentUpdateFn = () => {
-      debugger
+      // debugger
       if (!instance.isMounted) {
         let vnodeHook: VNodeHook | null | undefined
         const { el, props } = initialVNode
@@ -1493,6 +1494,7 @@ function baseCreateRenderer(
         if (__DEV__) {
           startMeasure(instance, `patch`)
         }
+        
         patch(
           prevTree,
           nextTree,

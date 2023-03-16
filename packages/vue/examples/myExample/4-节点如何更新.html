@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div>
+        <p>{{ form.msg }}1</p>
+        <p>{{ form.msg }}2</p>
+        <div>
+            <p>{{ form.msg }}3</p>
+        </div>
+    </div>
+    <button>static</button>
+  </div>
+  <script>  
+    const { createApp } = Vue;
+    
+    var app = createApp({
+      data() {
+        return {
+          form: {
+            msg: 'hello vue',
+          }
+        }
+      },
+      mounted() {
+        setTimeout(() => {
+            this.form.msg = 'change'
+        }, 3000)
+      },
+      methods: {
+        
+      }
+    })
+    console.log(app)
+    app.mount('#app')
+
+  </script>
+  <script>
+    /**
+       如何动态更新:
+
+    
+     */
+  </script>
+</body>
+</html>
