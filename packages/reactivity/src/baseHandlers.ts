@@ -93,7 +93,7 @@ function hasOwnProperty(this: object, key: string) {
 
 function createGetter(isReadonly = false, shallow = false) {
   return function get(target: Target, key: string | symbol, receiver: object) {
-    // debugger
+    debugger
     if (key === ReactiveFlags.IS_REACTIVE) {
       return !isReadonly
     } else if (key === ReactiveFlags.IS_READONLY) {
@@ -166,7 +166,7 @@ function createSetter(shallow = false) {
     value: unknown,
     receiver: object
   ): boolean {
-    // debugger
+    debugger
     let oldValue = (target as any)[key]
     if (isReadonly(oldValue) && isRef(oldValue) && !isRef(value)) {
       return false

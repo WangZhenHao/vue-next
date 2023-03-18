@@ -1494,7 +1494,7 @@ function baseCreateRenderer(
         if (__DEV__) {
           startMeasure(instance, `patch`)
         }
-        
+        // debugger
         patch(
           prevTree,
           nextTree,
