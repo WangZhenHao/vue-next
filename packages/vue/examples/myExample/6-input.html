@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <u-input v-model="form.msg"></u-input>
+    <button>获取数据</button>
+  </div>
+  <script>  
+    const { createApp, h } = Vue;
+
+    var app = createApp({
+      data() {
+        return {
+          form: {
+            msg: 'hello vue',
+          }
+        }
+      },
+    })
+    
+    app.component('u-input', {
+        template: `<input :value="modelValue" @input="inputHandle"  />`,
+        props: {
+            modelValue: {
+                type: String,
+                default: ''
+            }
+        },
+        methods: {
+            inputHandle(e) {
+                this.$emit('update:modelValue', e.target.value)
+            }
+        }
+    })
+
+    app.mount('#app')
+
+  </script>
+  <script>
+    
+  </script>
+</body>
+</html>

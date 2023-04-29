@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    
+  </div>
+  <script>  
+    const { createApp, h } = Vue;
+    
+    var app = createApp({
+      data() {
+        return {
+          form: {
+            msg: 'hello vue',
+          }
+        }
+      },
+      render(ctx) {
+        const _Vue  = Vue
+        with(ctx) {
+            debugger
+            return h('h1', form.msg)
+        }
+      },
+    })
+    
+    app.mount('#app')
+
+  </script>
+  <script>
+    
+  </script>
+</body>
+</html>

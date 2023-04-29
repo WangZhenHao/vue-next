@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+      <ul>
+          <li v-for="(item, index) in list">{{ item.name }}</li>
+          <li>{{ list[0].name }}-dynamic</li>
+          <li>static</li>
+      </ul>
+    <button>static</button>
+  </div>
+  <script>
+    (function anonymous(
+) {
+const _Vue = Vue
+const { createElementVNode: _createElementVNode } = _Vue
+
+const _hoisted_1 = /*#__PURE__*/_createElementVNode("li", null, "static", -1 /* HOISTED */)
+const _hoisted_2 = /*#__PURE__*/_createElementVNode("button", null, "static", -1 /* HOISTED */)
+
+return function render(_ctx, _cache) {
+  with (_ctx) {
+    const { renderList: _renderList, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock, toDisplayString: _toDisplayString, createElementVNode: _createElementVNode } = _Vue
+
+    return (_openBlock(), _createElementBlock(_Fragment, null, [
+      _createElementVNode("ul", null, [
+        (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(list, (item, index) => {
+          return (_openBlock(), _createElementBlock("li", null, _toDisplayString(item.name), 1 /* TEXT */))
+        }), 256 /* UNKEYED_FRAGMENT */)),
+        _createElementVNode("li", null, _toDisplayString(list[0].name) + "-dynamic", 1 /* TEXT */),
+        _hoisted_1
+      ]),
+      _hoisted_2
+    ], 64 /* STABLE_FRAGMENT */))
+  }
+}
+})
+  </script>
+  <script>  
+    const { createApp } = Vue;
+    
+    var app = createApp({
+      data() {
+        return {
+          list: [
+                { name: 1 },
+                { name: 2 },
+                { name: 3 }
+            ]
+        }
+      },
+      mounted() {
+        setTimeout(() => {
+          this.list.splice(0, 1)
+          console.log(this.list)
+        }, 2000)
+      },
+      methods: {
+        
+      }
+    })
+    console.log(app)
+    app.mount('#app')
+
+  </script>
+  <script>
+    
+  </script>
+</body>
+</html>

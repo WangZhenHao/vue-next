@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- <a>1</a> -->
+    <!-- <input v-model="test.name" /> -->
+    <!-- {{ test }} -->
+  </div>
+  <script>  
+    var { createApp, ref, onMounted, watch, reactive  } = Vue;
+
+    var app = createApp({
+        setup() {
+          debugger
+            var test = ref({ name: 1 });
+            // test.value = { name: 1 }
+            onMounted(() => {
+              // debugger
+              // test.value = { name: 1 }
+              // test.value = { name: 1 }
+            })
+            setTimeout(() => {
+              test.value.name = Math.random();
+              // test.value.name = test.value.name ? test.value.name++ : 1
+              // if(test.value.name) {
+              //   test.value.name++
+              // } else {
+              //   test.value.name = 1;
+              // }
+              // console.log(test.value)
+            }, 3000)
+            watch(() => test.value, () => {
+              // console.log(test.value)
+              debugger
+            })
+
+            // test.value = { name: 1 }
+
+            return {
+                test,
+            }
+        }
+    })
+    app.mount('#app')
+
+  </script>
+  <script>
+  </script>
+</body>
+</html>
