@@ -167,6 +167,7 @@ export function watch<T = any, Immediate extends Readonly<boolean> = false>(
         `supports \`watch(source, cb, options?) signature.`
     )
   }
+  
   return doWatch(source as any, cb, options)
 }
 
@@ -175,6 +176,7 @@ function doWatch(
   cb: WatchCallback | null,
   { immediate, deep, flush, onTrack, onTrigger }: WatchOptions = EMPTY_OBJ
 ): WatchStopHandle {
+  // debugger
   if (__DEV__ && !cb) {
     if (immediate !== undefined) {
       warn(
@@ -205,7 +207,7 @@ function doWatch(
   let getter: () => any
   let forceTrigger = false
   let isMultiSource = false
-
+  // debugger
   if (isRef(source)) {
     getter = () => source.value
     forceTrigger = isShallow(source)
@@ -268,7 +270,7 @@ function doWatch(
       return val
     }
   }
-
+  // getter();
   if (cb && deep) {
     const baseGetter = getter
     getter = () => traverse(baseGetter())
@@ -370,7 +372,7 @@ function doWatch(
     effect.onTrack = onTrack
     effect.onTrigger = onTrigger
   }
-
+  // debugger
   // initial run
   if (cb) {
     if (immediate) {

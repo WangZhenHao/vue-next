@@ -80,7 +80,6 @@ export function ref<T extends object>(
 export function ref<T>(value: T): Ref<UnwrapRef<T>>
 export function ref<T = any>(): Ref<T | undefined>
 export function ref(value?: unknown) {
-  // debugger
   return createRef(value, false)
 }
 
@@ -117,13 +116,16 @@ class RefImpl<T> {
   }
 
   get value() {
+    debugger
     trackRefValue(this)
     return this._value
   }
 
   set value(newVal) {
+    // debugger
     const useDirectValue =
       this.__v_isShallow || isShallow(newVal) || isReadonly(newVal)
+      // debugger
     newVal = useDirectValue ? newVal : toRaw(newVal)
     if (hasChanged(newVal, this._rawValue)) {
       this._rawValue = newVal

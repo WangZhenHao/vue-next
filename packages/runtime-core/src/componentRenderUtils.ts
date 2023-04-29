@@ -99,7 +99,7 @@ export function renderComponentRoot(
       //     ], 64 /* STABLE_FRAGMENT */))
       //   }
       // })`)
-      console.log(render)
+      // console.log(render)
       result = normalizeVNode(
         render!.call(
           proxyToUse,

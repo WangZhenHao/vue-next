@@ -307,7 +307,7 @@ export const PublicInstanceProxyHandlers: ProxyHandler<any> = {
         }
       } else if (hasSetupBinding(setupState, key)) {
         accessCache![key] = AccessTypes.SETUP
-        console.log(setupState[key])
+        // console.log(setupState[key])
         // debugger
         return setupState[key]
       } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {

@@ -213,7 +213,6 @@ export function resetTracking() {
 }
 
 export function track(target: object, type: TrackOpTypes, key: unknown) {
-  // debugger
   if (shouldTrack && activeEffect) {
     let depsMap = targetMap.get(target)
     if (!depsMap) {
@@ -229,7 +228,7 @@ export function track(target: object, type: TrackOpTypes, key: unknown) {
       : undefined
 
     trackEffects(dep, eventInfo)
-    // console.log(key, targetMap)
+    console.log(key, targetMap)
   }
 }
 

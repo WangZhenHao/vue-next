@@ -13,41 +13,55 @@
     }
     var p = new Proxy(obj, {
       get(target, key, value) {
-        console.log('触发get', target, key, value)
-
+        debugger
+        if ((key) === Symbol.unscopables) {
+          return
+        }
+        
         return target[key]
       },
       set(target, key, value) {
-        console.log('触发set', target, key, value)
+        // console.log('触发set', target, key, value)
         target[key] = value
+      },
+      has(target, key) {
+        let has = key[0] !== '_'
+        debugger
+        return has
       }
     })
 
-    var a = p.a;
-    p.c = 3
-    var c = p.c
-    // console.log(p)
-
-    /* 声明响应函数cb */
-    const effectStack = []
-    function effect(cb){  // 对函数进行高阶封装  
-      const rxEffect = function(){    
-        // 1.捕获异常    
-        // 2.fn出栈入栈    
-        // 3.执行fn    
-        try{      
-          effectStack.push(rxEffect)      
-          return cb()  
-        } finally{
-          effectStack.pop()
-        }
-        
-      } 
-       // 最初要执行一次,进行最初的依赖收集  
-      rxEffect()
-
-      return rxEffect
+    // var a = p.a;
+    // p.c = 3
+    // var c = p.c
+    
+    const render = function(ctx) {
+      const _con = console
+      with(ctx) {
+        _con.log(a)
+      }
     }
+    render.call(p, p)
+    // /* 声明响应函数cb */
+    // const effectStack = []
+    // function effect(cb){  // 对函数进行高阶封装  
+    //   const rxEffect = function(){    
+    //     // 1.捕获异常    
+    //     // 2.fn出栈入栈    
+    //     // 3.执行fn    
+    //     try{      
+    //       effectStack.push(rxEffect)      
+    //       return cb()  
+    //     } finally{
+    //       effectStack.pop()
+    //     }
+        
+    //   } 
+    //    // 最初要执行一次,进行最初的依赖收集  
+    //   rxEffect()
+
+    //   return rxEffect
+    // }
     
     // effect(function() {
     //   return 1
