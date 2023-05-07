@@ -10,15 +10,11 @@
   <div id="app">
   </div>
   <script>  
-    var { createApp, ref, watch, onMounted  } = Vue;
+    var { createApp, reactive  } = Vue;
 
     var app = createApp({
         setup() {
             var test = ref({name: 0});
-
-            // onMounted(() => {
-            //   test.value = { name: 1 }
-            // })
 
             setInterval(() => {
               test.value.name++
