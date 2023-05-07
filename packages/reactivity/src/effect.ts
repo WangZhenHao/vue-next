@@ -228,7 +228,7 @@ export function track(target: object, type: TrackOpTypes, key: unknown) {
       : undefined
 
     trackEffects(dep, eventInfo)
-    console.log(key, targetMap)
+    // console.log(key, targetMap)
   }
 }
 

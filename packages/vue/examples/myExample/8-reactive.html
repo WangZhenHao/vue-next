@@ -8,24 +8,37 @@
 </head>
 <body>
   <div id="app">
+    <!-- {{ test }} -->
+    {{ testMap }}
+    <!-- <p v-for="item in testMap"> {{ item[1] }}</p> -->
   </div>
   <script>  
     var { createApp, reactive  } = Vue;
 
     var app = createApp({
         setup() {
-            var test = ref({name: 0});
+            // var test = reactive({ 
+            //   name: 1,
+            // });
+            var testMap = reactive(new Map([
+              [1, '深圳'],
+              [2, '广州']
+            ]))
 
-            setInterval(() => {
-              test.value.name++
+            setTimeout(() => {
+              // test.name++
+              
+              // console.log(testMap.set(3, '北京'))
+              testMap = {name: 1}
+              console.log(testMap)
             }, 3000)
-
-            watch(test.value.name, () => {
-              debugger
-            })
-
+            
+            // for(let i of testMap) {
+            //   console.log(i)
+            // }
             return {
-                test,
+                // test,
+                testMap
             }
         }
     })
