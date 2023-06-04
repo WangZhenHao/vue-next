@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <test>
+            <template v-slot:footer>
+                <button @click="alert">footer</button>
+            </template>
+
+            <template v-slot:header>
+                <h1>header</h1>
+            </template>
+        </test>
+    </div>
+    <script>
+        var { createApp  } = Vue;
+
+        var app = createApp({
+            methods: {
+                alert() {
+                    alert(1)
+                }
+            }
+        })
+
+        app.component('test', {
+            template: `
+                <div>
+                    <main>组件</main>
+                    <header>
+                        <slot name="header"></slot>
+                    </header>
+                    <footer>
+                       <slot name="footer"></slot>
+                    </footer>
+                </div>
+            `
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>
