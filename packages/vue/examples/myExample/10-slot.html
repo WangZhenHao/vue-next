@@ -9,6 +9,7 @@
 </head>
 <body>
     <div id="app">
+        <h1>你好</h1>
         <test>
             <template v-slot:footer>
                 <button @click="alert">footer</button>
@@ -27,6 +28,9 @@
                 alert() {
                     alert(1)
                 }
+            },
+            mounted() {
+                console.log(this.$slots)
             }
         })
 
@@ -41,7 +45,10 @@
                        <slot name="footer"></slot>
                     </footer>
                 </div>
-            `
+            `,
+            mounted() {
+                console.log(this.$slots.footer())
+            }
         })
 
         app.mount('#app')

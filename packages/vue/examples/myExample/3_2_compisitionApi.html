@@ -16,7 +16,7 @@
 
     <script>
         
-        var { createApp, ref, reactive, onMounted  } = Vue;
+        var { createApp, ref, reactive, onMounted, h  } = Vue;
 
         var app = createApp({
             setup() {
@@ -44,7 +44,10 @@
                     test,
                     showAlert
                 }
-            }
+            },
+            // render() {
+            //     return h('h1', '1111')
+            // }
         })
         app.mount('#demo')
         /**
