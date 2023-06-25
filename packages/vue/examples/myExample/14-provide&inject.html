@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <el-form>
+            <el-form-item prop="key1">111</el-form-item>
+            <el-form-item prop="key2">222</el-form-item>
+        </el-form>
+    </div>
+    <script>
+        var { createApp, provide, inject, reactive, ref }  = Vue;
+
+        var app = createApp({
+
+        })
+        app.component('el-form', {
+            template: `
+                <div class="form">
+                    <slot />
+                </div>
+            `,
+            setup() {
+                const list = ref([])
+                function test(fiel) {
+                    list.value.push(fiel)
+                    console.log(list.value)
+                }
+                provide('elFormContext', reactive({
+                    test
+                }))
+            }
+        })
+
+        app.component('el-form-item', {
+            props: {
+                prop: {
+                    type: String,
+                    default: ''
+                }
+            },
+            template: `
+              <div class="item">
+                <slot />
+             </div>
+            `,
+            setup() {
+
+            },
+            created() {
+                const { test } = inject('elFormContext')
+                test(this)
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

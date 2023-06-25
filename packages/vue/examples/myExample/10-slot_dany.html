@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>你好</h1>
+        <test>
+            <template v-slot:action>
+                <button @click="alert">action</button>
+            </template>
+
+            <template v-slot:footer>
+                <h1>footer</h1>
+            </template>
+        </test>
+    </div>
+    <script>
+        var { createApp  } = Vue;
+
+        var app = createApp({
+            methods: {
+                alert() {
+                    alert(1)
+                }
+            },
+            mounted() {
+                // console.log(this.$slots)
+            }
+        })
+
+        app.component('test', {
+            data() {
+                return {
+                    nameSlot: 'action'
+                }
+            },
+            template: `
+                <div>
+                    <main>组件</main>
+                    <header>
+                        <slot :name="nameSlot"></slot>
+                    </header>
+                    <footer>
+                       <slot name="footer"></slot>
+                    </footer>
+                </div>
+            `,
+            mounted() {
+                console.log(this.$slots)
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>
