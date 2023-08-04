@@ -9,7 +9,6 @@
 </head>
 <body>
     <div id="app">
-        <h1>你好</h1>
         <test>
             <template #footer="scope">
                 <button @click="alert">footer</button>
@@ -18,7 +17,7 @@
         </test>
     </div>
     <script>
-        var { createApp  } = Vue;
+        var { createApp, h  } = Vue;
 
         var app = createApp({
             methods: {
@@ -38,20 +37,31 @@
                         name: '1',
                         adress: '1',
                         age: 11
-                    }
+                    },
+                    dataList: [
+                        {
+                            lable: '测试1',
+                        },
+                        {
+                            lable: '测试2',
+                        },
+                        {
+                            lable: '测试3',
+                        },
+                        {
+                            lable: '测试4',
+                            render(h, row) {
+                                debugger
+                                return h('h1', '1111')
+                            }
+                        }
+                    ]
                 }
             },
             template: `
                 <div>
-                    <main>组件</main>
-                    <footer>
-                        <el-table-column v-bind="form" v-for="item in [1,2,3]">
-                            <template #default="scope">
-                                <slot name="footer" v-bind="scope"></slot>
-                            </template>
-                        </el-table-column>
-                       
-                    </footer>
+                    <el-table-column :item="item" v-for="item in dataList">
+                    </el-table-column>
                 </div>
             `,
             mounted() {
@@ -60,10 +70,18 @@
         })
 
         app.component('el-table-column', {
+            props: {
+                item: {
+                    type: Object,
+                    default() {
+                        return {}
+                    }
+                }
+            },
             template: `
                 <div>
-                   el-colume组件
-                   <slot v-bind="{scope: $attrs}" />
+                   {{ item.lable }}
+                   <component v-if="item.render" :is="item.render(h, item)"></component>
                 </div>
             `,
             data() {
@@ -72,7 +90,8 @@
                         name: '2',
                         address: '2',
                         age: 22
-                    }
+                    },
+                    h: h
                     
                 }
             },
