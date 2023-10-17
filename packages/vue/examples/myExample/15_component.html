@@ -1,13 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+    <script src="../../dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div
+        class="2"
+        data-1="2"
+        data2="213"
+        data-13="23"
+        data-23="23"
+        data-4="2323"
+      >
+        {{ msg }}
+      </div>
+      <component :is="renderMthods(_Vue.h)"></component>
+      <component is="test"></component>
+      <component
+        :is="{
+        template: '<div>渲染成功</div>'
+      }"
+      ></component>
+      <component
+        :is="{
+        setup() {
+          return () => {
+            return _Vue.h('h1', '渲染成功')
+          }
+        }
+      }"
+      ></component>
+    </div>
     <script>
-        
+      let { createApp } = Vue
+
+      var app = createApp({
+        name: 'app',
+        data() {
+          return {
+            msg: 'hello'
+          }
+        },
+        methods: {
+          renderMthods(h, params) {
+            return h('div', 'aaa')
+          }
+        }
+      })
+      app.component('test', {
+        name: 'test',
+        template: `<div> test组件 </div>`
+      })
+
+      app.component('test-setup', {
+        name: 'test-setup',
+        setup() {
+          return () => {
+            return Vue.h('h1', 'hhh')
+          }
+        }
+        // template: `<h1> test组件 </h1>`
+      })
+
+      app.mount('#app')
     </script>
-</body>
+    <script>
+      ;(function anonymous() {
+        const _Vue = Vue
+
+        return function render(_ctx, _cache) {
+          with (_ctx) {
+            const {
+              toDisplayString: _toDisplayString,
+              createElementVNode: _createElementVNode,
+              resolveDynamicComponent: _resolveDynamicComponent,
+              openBlock: _openBlock,
+              createBlock: _createBlock,
+              Fragment: _Fragment,
+              createElementBlock: _createElementBlock
+            } = _Vue
+
+            return (
+              _openBlock(),
+              _createElementBlock(
+                _Fragment,
+                null,
+                [
+                  _createElementVNode(
+                    'div',
+                    null,
+                    _toDisplayString(msg),
+                    1 /* TEXT */
+                  ),
+                  (_openBlock(),
+                  _createBlock(_resolveDynamicComponent(renderMthods(_Vue.h)))),
+                  (_openBlock(), _createBlock(_resolveDynamicComponent('test')))
+                ],
+                64 /* STABLE_FRAGMENT */
+              )
+            )
+          }
+        }
+      })
+    </script>
+  </body>
 </html>
