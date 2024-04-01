@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <div  class="partent" ref="wrap">
+            <button  v-if="show" class="btn">我是按钮</button>
+          </div>
+          <button @click="handle">删除/显示</button>
+          <button @click="magicHadnle">魔术删除</button>
+          <button @click="() => counter++">自增</button>
+          <h1>{{ counter }}</h1>
+      </div>
+      
+    </div>
+    <script>
+      var app = Vue.createApp({
+        data() {
+          return {
+            show: true,
+            counter: 0
+          }
+        },
+        mounted() {
+            // debugger
+        },
+        updated() {
+            // debugger
+        },
+        methods: {
+           
+          magicHadnle() {
+            var a  = document.querySelector('.btn')
+            // console.log(a._vnode)
+            console.log()
+            a._vnode = a.__vnode;
+            // console.log(Vue.h('span', []));
+            Vue.render(null, a)
+            // console.log(Vue.createCommentVNode('v-if'))
+            // console.log(this.$.subTree.dynamicChildren[0] = Vue.createCommentVNode('v-if'))
+            // a._vnode = Vue.h('span', [])
+          },
+          
+          handle() {
+            this.show = !this.show
+            // console.log(this.$refs.wrap)
+            // console.log(__vnode)
+            // var a  = document.querySelector('.partent')
+            // a._vnode = a.__vnode
+            // Vue.render(null, a)
+            // console.log(document.getElementById('app')._vnode)
+            // setTimeout(() => {
+            // // equal to $destroy
+            // Vue.render(null, document.getElementById('wrap') )
+            // }, 1000)
+          }
+        }
+      })
+
+      app.mount('#app')
+    </script>
+  </body>
+</html>
