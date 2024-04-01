@@ -14,6 +14,10 @@
                 <button @click="alert">footer</button>
                 {{ scope }}
             </template>
+            <template #header="scope">
+                <button @click="alert">header</button>
+                {{ scope }}
+            </template>
         </test>
     </div>
     <script>
@@ -41,17 +45,18 @@
                     dataList: [
                         {
                             lable: '测试1',
+                            slotName: 'header'
                         },
                         {
                             lable: '测试2',
                         },
                         {
                             lable: '测试3',
+                            slotName: 'footer'
                         },
                         {
                             lable: '测试4',
                             render(h, row) {
-                                debugger
                                 return h('h1', '1111')
                             }
                         }
@@ -61,14 +66,18 @@
             template: `
                 <div>
                     <el-table-column :item="item" v-for="item in dataList">
+                      <template #default>
+                            <slot v-if="item.slotName" :name="item.slotName" v-bind="item"></slot>
+                      </template>
                     </el-table-column>
+                    
                 </div>
             `,
             mounted() {
-                // console.log(this.$slots.footer())
+                // console.log(this.$slots)
             }
         })
-
+        // <slot v-if="item.slotName" :name="item.slotName">
         app.component('el-table-column', {
             props: {
                 item: {
@@ -80,8 +89,9 @@
             },
             template: `
                 <div>
-                   {{ item.lable }}
+                   {{ item.lable }}-{{item.slotName}}
                    <component v-if="item.render" :is="item.render(h, item)"></component>
+                   <slot></slot>
                 </div>
             `,
             data() {
@@ -96,7 +106,7 @@
                 }
             },
             mounted() {
-                console.log(this.$attrs)
+                // console.log(this.$slots)
             }
         })
         app.mount('#app')

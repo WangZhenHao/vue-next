@@ -9,14 +9,15 @@
 <body>
     <script>
         const p = Promise.resolve();
-        function test() {
+        function test(a, b) {
             console.log(1)
             p.then(() => {
                 console.log(2)
             })
             console.log(3)
         }
-
+        console.log(test.push)
+        debugger
         test()
         test()
     </script>
