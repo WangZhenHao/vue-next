@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="../../dist/vue.global.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <test ref="testRef1"></test>
+            <!-- <test :ref="testRef2"></test>
+            <test :ref="testRef3"></test>
+            <test ref="testRef4"></test>
+            <test :ref="testRef5"></test> -->
+        </div>
+        <script>
+            const { createApp, onMounted, ref } = Vue;
+            var app = createApp({
+                setup() {
+                    const testRef1 = ref();
+                    const testRef2 = ref("testRef2Value");
+                    const testRef3 = ref("testRef3");
+                    const testRef4 = ref(null);
+                    const testRef5 = ref(null);
+                    onMounted(() => {
+                        console.log("testRef1", testRef1.value);
+                        console.log("testRef2", testRef2.value);
+                        console.log("testRef3", testRef3.value);
+                        console.log("testRef4", testRef4.value);
+                        console.log("testRef5", testRef5.value);
+                    });
+                    return {
+                        testRef1,
+                        testRef2,
+                        testRef3,
+                        testRef4,
+                        testRef5
+                    };
+                },
+            });
+            app.component("test", {
+                name: "test",
+                template: `<div> test组件 </div>`,
+                methods: {
+                    show() {
+                        alert(1);
+                    },
+                },
+            });
+
+            app.mount("#app");
+        </script>
+    </body>
+</html>
