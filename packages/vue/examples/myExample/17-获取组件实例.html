@@ -8,7 +8,7 @@
     </head>
     <body>
         <div id="app">
-            <test ref="testRef1"></test>
+            <test :ref="fnRefs"></test>
             <!-- <test :ref="testRef2"></test>
             <test :ref="testRef3"></test>
             <test ref="testRef4"></test>
@@ -30,12 +30,12 @@
                         console.log("testRef4", testRef4.value);
                         console.log("testRef5", testRef5.value);
                     });
+                    const fnRefs = (value, refs) => {
+                        console.log(value, refs)
+                        debugger
+                    }
                     return {
-                        testRef1,
-                        testRef2,
-                        testRef3,
-                        testRef4,
-                        testRef5
+                        fnRefs
                     };
                 },
             });
